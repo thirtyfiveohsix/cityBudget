@@ -123,7 +123,7 @@ async function boot() {
     const h1 = document.createElement('h1');
     h1.textContent = `cityBudget — ${data.city}`;
     const p = document.createElement('p');
-    p.textContent = 'First draft: browse a hierarchical budget by year. (Sample data for UI.)';
+    p.textContent = 'Browse a hierarchical budget by year. (2022–2023 pulled from South Bend budget books; 2024 is a headline total until we extract the full book.)';
     hg.appendChild(h1);
     hg.appendChild(p);
 

@@ -13,42 +13,67 @@
   "years": [2022, 2023, 2024],
   "currency": "USD",
   "root": {
-    "name": "Total Budget",
+    "name": "Total Civil City Budget",
+    "series": {"2022": 401738733, "2023": 426640488, "2024": 417000000},
     "children": [
       {
-        "name": "Public Safety",
-        "series": {"2022": 82000000, "2023": 87000000, "2024": 91000000},
+        "name": "General Fund",
+        "series": {"2022": 109584091, "2023": 100759924},
         "children": [
-          {"name": "Police", "series": {"2022": 46000000, "2023": 49000000, "2024": 51000000}},
-          {"name": "Fire", "series": {"2022": 31000000, "2023": 33000000, "2024": 35000000}},
-          {"name": "Emergency Mgmt", "series": {"2022": 5000000, "2023": 5000000, "2024": 5000000}}
+          {
+            "name": "Public Safety",
+            "series": {"2022": 59108929, "2023": 71737903},
+            "children": [
+              {"name": "Fire", "series": {"2022": 27139143, "2023": 30795707}},
+              {"name": "Police", "series": {"2022": 31969786, "2023": 40942196}}
+            ]
+          },
+          {"name": "Mayor's Office, City Clerk, and Common Council", "series": {"2022": 3731065, "2023": 2336438}},
+          {"name": "Controller's Office, Human Resources", "series": {"2022": 3492818, "2023": 3608261}},
+          {"name": "Diversity & Inclusion, Human Rights", "series": {"2022": 1073552, "2023": 1103740}},
+          {"name": "Legal Department", "series": {"2022": 1695716, "2023": 1740630}},
+          {"name": "Other", "series": {"2022": 40482011, "2023": 20232952}}
         ]
       },
       {
-        "name": "Public Works",
-        "series": {"2022": 54000000, "2023": 56000000, "2024": 59000000},
+        "name": "Special Revenue Funds",
+        "series": {"2022": 101730013, "2023": 106131058},
         "children": [
-          {"name": "Streets", "series": {"2022": 21000000, "2023": 22000000, "2024": 23000000}},
-          {"name": "Sanitation", "series": {"2022": 18000000, "2023": 18500000, "2024": 19500000}},
-          {"name": "Water", "series": {"2022": 15000000, "2023": 15500000, "2024": 16500000}}
+          {"name": "Parks & Recreation", "series": {"2022": 16484004, "2023": 26759101}},
+          {"name": "Motor Vehicle Highway", "series": {"2022": 14844669, "2023": 17063012}},
+          {"name": "Local Income Tax Funds", "series": {"2022": 38667384, "2023": 40387488}},
+          {"name": "Certified Shares", "series": {"2022": 12167559, "2023": 13131810}},
+          {"name": "Economic Development", "series": {"2022": 13810778, "2023": 17757120}},
+          {"name": "Public Safety", "series": {"2022": 12689047, "2023": 9498558}},
+          {"name": "Other", "series": {"2022": 31733956, "2023": 21921457}}
+        ]
+      },
+      {"name": "Capital Projects and Debt Service Funds", "series": {"2022": 19833923, "2023": 16394201}},
+      {
+        "name": "Fiduciary Funds",
+        "series": {"2022": 10641628, "2023": 10657724},
+        "children": [
+          {"name": "Fire Pension Fund", "series": {"2022": 4583888, "2023": 4593840}},
+          {"name": "Police Pension Fund", "series": {"2022": 6057740, "2023": 6063884}}
+        ]
+      },
+      {"name": "Internal Service Funds", "series": {"2022": 41655940, "2023": 43953184}},
+      {
+        "name": "Enterprise Funds",
+        "series": {"2022": 118293138, "2023": 148744397},
+        "children": [
+          {"name": "Sewage Works Operations & Capital Funds", "series": {"2022": 64969101, "2023": 84607242}},
+          {"name": "Water Works Operations & Capital Funds", "series": {"2022": 34820183, "2023": 45212071}},
+          {"name": "Solid Waste Operating & Capital Funds", "series": {"2022": 9567625, "2023": 9786597}},
+          {"name": "Other", "series": {"2022": 8936229, "2023": 9138487}}
         ]
       },
       {
-        "name": "Parks & Recreation",
-        "series": {"2022": 17000000, "2023": 17500000, "2024": 18200000},
+        "name": "Redevelopment Commission Controlled Funds",
+        "series": {"2022": 31028649},
         "children": [
-          {"name": "Parks", "series": {"2022": 11000000, "2023": 11200000, "2024": 11600000}},
-          {"name": "Programs", "series": {"2022": 6000000, "2023": 6300000, "2024": 6600000}}
-        ]
-      },
-      {
-        "name": "General Government",
-        "series": {"2022": 26000000, "2023": 27000000, "2024": 28000000},
-        "children": [
-          {"name": "Mayor's Office", "series": {"2022": 3000000, "2023": 3100000, "2024": 3200000}},
-          {"name": "Finance", "series": {"2022": 9000000, "2023": 9300000, "2024": 9600000}},
-          {"name": "IT", "series": {"2022": 6000000, "2023": 6200000, "2024": 6500000}},
-          {"name": "Legal", "series": {"2022": 8000000, "2023": 8400000, "2024": 8700000}}
+          {"name": "Tax Increment Financing Funds", "series": {"2022": 28582399}},
+          {"name": "Other", "series": {"2022": 2446250}}
         ]
       }
     ]
