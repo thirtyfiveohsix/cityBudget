@@ -155,7 +155,10 @@ async function boot() {
   const data = await fetch('/south-bend-budget.sample.json').then(r => r.json());
   attachParents(data.root, null);
 
-  let year = data.years[data.years.length - 1];
+  const hasBreakdown = (node, y) => (node.children || []).some(c => sumSeries(c, y) > 0);
+
+  // Default to the most recent year that actually has a breakdown (2024 is currently top-line only).
+  let year = [...data.years].reverse().find(y => hasBreakdown(data.root, y)) ?? data.years[data.years.length - 1];
   let focus = data.root;
 
   function setFocus(node) {
@@ -252,6 +255,14 @@ async function boot() {
     title1.className = 'small';
     title1.textContent = 'Breakdown';
     left.appendChild(title1);
+
+    if (!hasBreakdown(focus, year)) {
+      const note = document.createElement('div');
+      note.className = 'card';
+      note.innerHTML = `<div class="small">No breakdown available for ${year} at this level yet.</div><div class="small">Try selecting an earlier year (or go Back).</div>`;
+      left.appendChild(note);
+    }
+
     left.appendChild(renderTree(focus, year, { onSelect: setFocus, selected: null }));
 
     const right = document.createElement('div');
