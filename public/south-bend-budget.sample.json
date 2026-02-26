@@ -1,0 +1,50 @@
+{
+  "city": "South Bend, IN",
+  "source": {
+    "name": "Placeholder sample data",
+    "notes": "First draft UI only. Replace with official budget data + citations."
+  },
+  "years": [2022, 2023, 2024],
+  "currency": "USD",
+  "root": {
+    "name": "Total Budget",
+    "children": [
+      {
+        "name": "Public Safety",
+        "series": {"2022": 82000000, "2023": 87000000, "2024": 91000000},
+        "children": [
+          {"name": "Police", "series": {"2022": 46000000, "2023": 49000000, "2024": 51000000}},
+          {"name": "Fire", "series": {"2022": 31000000, "2023": 33000000, "2024": 35000000}},
+          {"name": "Emergency Mgmt", "series": {"2022": 5000000, "2023": 5000000, "2024": 5000000}}
+        ]
+      },
+      {
+        "name": "Public Works",
+        "series": {"2022": 54000000, "2023": 56000000, "2024": 59000000},
+        "children": [
+          {"name": "Streets", "series": {"2022": 21000000, "2023": 22000000, "2024": 23000000}},
+          {"name": "Sanitation", "series": {"2022": 18000000, "2023": 18500000, "2024": 19500000}},
+          {"name": "Water", "series": {"2022": 15000000, "2023": 15500000, "2024": 16500000}}
+        ]
+      },
+      {
+        "name": "Parks & Recreation",
+        "series": {"2022": 17000000, "2023": 17500000, "2024": 18200000},
+        "children": [
+          {"name": "Parks", "series": {"2022": 11000000, "2023": 11200000, "2024": 11600000}},
+          {"name": "Programs", "series": {"2022": 6000000, "2023": 6300000, "2024": 6600000}}
+        ]
+      },
+      {
+        "name": "General Government",
+        "series": {"2022": 26000000, "2023": 27000000, "2024": 28000000},
+        "children": [
+          {"name": "Mayor's Office", "series": {"2022": 3000000, "2023": 3100000, "2024": 3200000}},
+          {"name": "Finance", "series": {"2022": 9000000, "2023": 9300000, "2024": 9600000}},
+          {"name": "IT", "series": {"2022": 6000000, "2023": 6200000, "2024": 6500000}},
+          {"name": "Legal", "series": {"2022": 8000000, "2023": 8400000, "2024": 8700000}}
+        ]
+      }
+    ]
+  }
+}
