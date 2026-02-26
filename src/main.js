@@ -8,6 +8,11 @@ const fmtUSD = new Intl.NumberFormat('en-US', {
   maximumFractionDigits: 0,
 });
 
+const fmtPct = new Intl.NumberFormat('en-US', {
+  style: 'percent',
+  maximumFractionDigits: 1,
+});
+
 function sumSeries(node, year) {
   if (node.series && node.series[String(year)] != null) return Number(node.series[String(year)]) || 0;
   if (!node.children?.length) return 0;
@@ -33,6 +38,63 @@ function sortChildrenByYear(node, year) {
   if (!node.children?.length) return;
   node.children.sort((a,b) => sumSeries(b, year) - sumSeries(a, year));
   node.children.forEach(c => sortChildrenByYear(c, year));
+}
+
+function valuesByYear(node, years) {
+  return years.map(y => ({ year: y, value: sumSeries(node, y) }));
+}
+
+function renderSparkline(points) {
+  const w = 360;
+  const h = 70;
+  const padX = 6;
+  const padY = 8;
+
+  const xs = points.map((_, i) => i);
+  const ys = points.map(p => p.value);
+  const minY = Math.min(...ys);
+  const maxY = Math.max(...ys);
+
+  const x = (i) => {
+    if (points.length === 1) return w / 2;
+    return padX + (i / (points.length - 1)) * (w - padX*2);
+  };
+  const y = (v) => {
+    if (maxY === minY) return h/2;
+    const t = (v - minY) / (maxY - minY);
+    return (h - padY) - t * (h - padY*2);
+  };
+
+  const d = points.map((p,i) => `${i===0?'M':'L'} ${x(i).toFixed(2)} ${y(p.value).toFixed(2)}`).join(' ');
+
+  const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+  svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+  svg.classList.add('sparkSvg');
+
+  // baseline
+  const axis = document.createElementNS(svg.namespaceURI,'line');
+  axis.setAttribute('x1','0');
+  axis.setAttribute('x2', String(w));
+  axis.setAttribute('y1', String(h - padY));
+  axis.setAttribute('y2', String(h - padY));
+  axis.classList.add('sparkAxis');
+  svg.appendChild(axis);
+
+  const path = document.createElementNS(svg.namespaceURI,'path');
+  path.setAttribute('d', d);
+  path.classList.add('sparkLine');
+  svg.appendChild(path);
+
+  // last point dot
+  const lastIdx = points.length - 1;
+  const dot = document.createElementNS(svg.namespaceURI,'circle');
+  dot.setAttribute('cx', x(lastIdx));
+  dot.setAttribute('cy', y(points[lastIdx].value));
+  dot.setAttribute('r', '3');
+  dot.classList.add('sparkDot');
+  svg.appendChild(dot);
+
+  return svg;
 }
 
 function renderTree(root, year, { onSelect, selected }) {
@@ -200,12 +262,17 @@ async function boot() {
     const det = document.createElement('div');
     det.className = 'card';
     const path = buildPath(focus).join(' → ');
+    const pct = total ? (focusTotal / total) : 0;
     det.innerHTML = `
       <div class="small">Path</div>
       <div class="path">${path}</div>
+
       <div style="height:10px"></div>
       <div class="small">Value (${year})</div>
-      <div style="font-size:22px;font-weight:800;margin-top:6px">${fmtUSD.format(focusTotal)}</div>
+      <div style="font-size:22px;font-weight:800;margin-top:6px">${fmtUSD.format(focusTotal)} <span style="font-size:12px;color:var(--muted);font-weight:600">(${fmtPct.format(pct)} of total)</span></div>
+
+      <div class="sparkWrap" id="spark"></div>
+
       <div style="height:12px"></div>
       <div class="small">Source</div>
       <div class="small">${data.source?.name || '—'}</div>
@@ -213,6 +280,15 @@ async function boot() {
       <div style="height:8px"></div>
       <div class="small" id="sources"></div>
     `;
+
+    const spark = det.querySelector('#spark');
+    const pts = valuesByYear(focus, data.years);
+    spark.appendChild(renderSparkline(pts));
+    const cap = document.createElement('div');
+    cap.className = 'small';
+    cap.style.marginTop = '6px';
+    cap.textContent = pts.map(p => `${p.year}: ${fmtUSD.format(p.value)}`).join(' · ');
+    spark.appendChild(cap);
 
     const sources = det.querySelector('#sources');
     const urls = data.source?.urls || [];
