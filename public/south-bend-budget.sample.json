@@ -1,8 +1,14 @@
 {
   "city": "South Bend, IN",
   "source": {
-    "name": "Placeholder sample data",
-    "notes": "First draft UI only. Replace with official budget data + citations."
+    "name": "South Bend budget transparency (official) + budget book PDFs",
+    "notes": "UI draft currently uses sample numbers while we extract/structure the official budget.",
+    "urls": [
+      "https://southbendin.gov/budget/",
+      "http://docs.southbendin.gov/WebLink/0/edoc/363823/2023%20Budget%20Book.pdf",
+      "http://docs.southbendin.gov/WebLink/0/edoc/349360/2022%20Budget%20Book.pdf",
+      "https://docs.southbendin.gov/WebLink/0/edoc/383272/10-09-2023%20City%20Budget%20Approval.pdf"
+    ]
   },
   "years": [2022, 2023, 2024],
   "currency": "USD",

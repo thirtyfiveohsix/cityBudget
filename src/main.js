@@ -208,8 +208,32 @@ async function boot() {
       <div style="font-size:22px;font-weight:800;margin-top:6px">${fmtUSD.format(focusTotal)}</div>
       <div style="height:12px"></div>
       <div class="small">Source</div>
-      <div class="small">${data.source?.name || '—'} — ${data.source?.notes || ''}</div>
+      <div class="small">${data.source?.name || '—'}</div>
+      <div class="small">${data.source?.notes || ''}</div>
+      <div style="height:8px"></div>
+      <div class="small" id="sources"></div>
     `;
+
+    const sources = det.querySelector('#sources');
+    const urls = data.source?.urls || [];
+    if (urls.length) {
+      const ul = document.createElement('ul');
+      ul.style.margin = '8px 0 0 16px';
+      ul.style.padding = '0';
+      ul.style.color = 'var(--muted)';
+      ul.style.fontSize = '12px';
+      for (const u of urls) {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = u;
+        a.target = '_blank';
+        a.rel = 'noreferrer';
+        a.textContent = u.replace(/^https?:\/\//,'');
+        li.appendChild(a);
+        ul.appendChild(li);
+      }
+      sources.appendChild(ul);
+    }
 
     right.appendChild(title2);
     right.appendChild(det);
